@@ -2,4 +2,6 @@
     <string name="app_name">Finder</string>
     <string name="your_personal_finance_reminder">Your Personal Finance Reminder</string>
     <string name="text_logo">Fin/ \n \t\t\t\t\t\t\t\t\t/Der</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
