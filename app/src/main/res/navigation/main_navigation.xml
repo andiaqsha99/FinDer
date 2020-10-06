@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.tugas.www.finder.SettingFragment"
+        android:name="com.tugas.www.finder.setting.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/nav_history"
-        android:name="com.tugas.www.finder.HistoryFragment"
+        android:name="com.tugas.www.finder.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/nav_calendar"
-        android:name="com.tugas.www.finder.CalendarFragment"
+        android:name="com.tugas.www.finder.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/nav_chart"
-        android:name="com.tugas.www.finder.ChartFragment"
+        android:name="com.tugas.www.finder.chart.ChartFragment"
         android:label="fragment_chart"
         tools:layout="@layout/fragment_chart" />
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.tugas.www.finder.HomeFragment"
+        android:name="com.tugas.www.finder.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 </navigation>
