@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".history.HistoryFragment">
+    android:layout_height="match_parent"
+    tools:context=".expenselimit.ExpenseLimitActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_history"
+        android:id="@+id/toolbar_expense_limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
@@ -17,14 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="History"
+            android:text="Set Expense Limit"
             android:textColor="@android:color/white"
             android:textSize="32sp"
             android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_history"
+        android:id="@+id/tab_expense_limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -32,8 +32,7 @@
         app:tabTextColor="@android:color/white"/>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
+        android:id="@+id/view_pager_expense"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 </LinearLayout>
