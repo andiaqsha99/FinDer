@@ -163,9 +163,11 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_main_monetary"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="36dp"
             tools:listitem="@layout/item_row_monetary_main" />
 
     </LinearLayout>

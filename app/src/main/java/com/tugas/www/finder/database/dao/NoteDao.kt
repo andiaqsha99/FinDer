@@ -17,4 +17,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM note")
     fun getAllNote(): LiveData<List<Note>>
+
+    @Query("SELECT DISTINCT date FROM note ORDER BY date ASC")
+    fun getListDate(): LiveData<List<String>>
 }

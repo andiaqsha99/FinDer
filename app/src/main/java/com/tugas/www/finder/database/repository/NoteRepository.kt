@@ -21,4 +21,8 @@ class NoteRepository(private val noteDao: NoteDao) {
     suspend fun deleteNote(note: Note) {
         noteDao.update(note)
     }
+
+    fun getListDate(): LiveData<List<String>> {
+        return noteDao.getListDate()
+    }
 }
