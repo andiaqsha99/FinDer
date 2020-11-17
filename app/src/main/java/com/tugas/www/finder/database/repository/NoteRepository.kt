@@ -25,4 +25,8 @@ class NoteRepository(private val noteDao: NoteDao) {
     fun getListDate(): LiveData<List<String>> {
         return noteDao.getListDate()
     }
+
+    fun getListMonth(): LiveData<List<String>> {
+        return noteDao.getListMonth()
+    }
 }

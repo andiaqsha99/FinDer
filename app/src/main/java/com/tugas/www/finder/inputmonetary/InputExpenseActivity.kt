@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import com.tugas.www.finder.MainActivity
 import com.tugas.www.finder.R
 import com.tugas.www.finder.database.model.Note
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_input_expense.*
 import kotlinx.android.synthetic.main.activity_input_income.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 class InputExpenseActivity : AppCompatActivity() {
@@ -49,6 +51,9 @@ class InputExpenseActivity : AppCompatActivity() {
         btn_expense_save.setOnClickListener {
             amount = et_expense_amount.text.toString().toInt()
             notes = et_expense_note.text.toString()
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val parser = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            dateString = sdf.format(parser.parse(dateString)!!)
             note = Note(
                 text = notes,
                 amount = amount,

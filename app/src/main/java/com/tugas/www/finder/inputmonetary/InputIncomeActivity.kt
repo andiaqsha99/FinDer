@@ -49,6 +49,9 @@ class InputIncomeActivity : AppCompatActivity() {
         btn_income_save.setOnClickListener {
             amount = et_income_amount.text.toString().toInt()
             notes = et_income_note.text.toString()
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val parser = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+            dateString = sdf.format(parser.parse(dateString)!!)
             note = Note(
                 text = notes,
                 amount = amount,

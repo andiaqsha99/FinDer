@@ -6,6 +6,7 @@ import com.tugas.www.finder.database.repository.NoteRepository
 import com.tugas.www.finder.database.repository.PlanRepository
 import com.tugas.www.finder.database.repository.UserRepository
 import com.tugas.www.finder.expenselimit.ExpenseLimitViewModel
+import com.tugas.www.finder.history.HistoryViewModel
 import com.tugas.www.finder.home.HomeViewModel
 import com.tugas.www.finder.inputmonetary.InputNoteViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -52,5 +53,9 @@ val appModule = module {
 
     viewModel {
         ExpenseLimitViewModel(get())
+    }
+
+    viewModel {
+        HistoryViewModel(get())
     }
 }

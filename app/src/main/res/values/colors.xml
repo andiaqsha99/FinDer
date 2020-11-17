@@ -7,4 +7,6 @@
     <color name="colorUngu">#8C39F6</color>
     <color name="colorFab">#FF7979</color>
     <color name="colorScrim">#66434343</color>
+    <color name="colorGreen">#00a113</color>
+    <color name="colorRed">#e30000</color>
 </resources>
