@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/revalia"
         android:text="@string/text_logo"
-        android:textColor="@color/colorUngu"
+        android:textColor="@color/logoUngu"
         android:textSize="64sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
