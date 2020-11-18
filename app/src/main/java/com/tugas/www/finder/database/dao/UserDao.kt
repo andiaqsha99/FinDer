@@ -15,6 +15,6 @@ interface UserDao {
     @Delete
     suspend fun delete(user: User)
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM user LIMIT 1")
     fun getUser(): LiveData<User>
 }

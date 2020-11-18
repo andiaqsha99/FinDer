@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialContainerTransform
@@ -18,6 +19,7 @@ import com.tugas.www.finder.fab.FabMenuAdapter
 import com.tugas.www.finder.inputmonetary.InputExpenseActivity
 import com.tugas.www.finder.inputmonetary.InputIncomeActivity
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -26,9 +28,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class HomeFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel by viewModel<HomeViewModel>()
+    private lateinit var homeMainAdapter: HomeMainAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +41,21 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeMainAdapter = HomeMainAdapter()
+        viewModel.apply {
+            setListNote()
+            setListDate()
+        }
+        rv_main_monetary.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = homeMainAdapter
+        }
+        viewModel.getListDate().observe(viewLifecycleOwner, Observer {
+            homeMainAdapter.setData(it)
+        })
+        viewModel.getListNote().observe(viewLifecycleOwner, Observer {
+            homeMainAdapter.setNote(it)
+        })
 
        setFab()
     }

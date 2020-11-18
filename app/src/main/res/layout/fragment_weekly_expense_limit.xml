@@ -34,6 +34,7 @@
             android:layout_marginRight="8dp"/>
 
         <EditText
+            android:id="@+id/et_weekly_limit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -51,45 +52,29 @@
         android:orientation="horizontal"
         android:padding="24dp">
 
-        <androidx.cardview.widget.CardView
+        <Button
+            android:id="@+id/btn_set_weekly"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_button_green"
+            android:text="set"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
             android:layout_height="wrap_content"
-            app:contentPadding="8dp"
-            app:cardBackgroundColor="#00a113"
-            app:cardCornerRadius="8dp"
-            android:layout_margin="4dp">
+            android:layout_margin="4dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="SET"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+        <Button
+            android:id="@+id/btn_delete_weekly"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_button_red"
+            android:text="delete"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
             android:layout_height="wrap_content"
-            app:contentPadding="8dp"
-            app:cardBackgroundColor="#e30000"
-            app:cardCornerRadius="8dp"
-            android:layout_margin="4dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="DELETE"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-
-        </androidx.cardview.widget.CardView>
+            android:layout_margin="4dp"/>
 
     </LinearLayout>
 

@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_income_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rp1.000.000.000,00"
@@ -22,6 +23,7 @@
             android:textColor="#00a113"/>
 
         <TextView
+            android:id="@+id/tv_income_note"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Jualan Wak Doyok"
@@ -36,6 +38,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_expense_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rp1.000.000.000,00"
@@ -45,6 +48,7 @@
             android:textColor="#e30000"/>
 
         <TextView
+            android:id="@+id/tv_expense_note"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Bucin"

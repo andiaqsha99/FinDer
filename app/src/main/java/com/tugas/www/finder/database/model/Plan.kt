@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 data class Plan(
     @PrimaryKey (autoGenerate = true) val id_plan: Long = 0,
     val text: String? = null,
+    val amount: Int = 0,
     val type: String? = null,
     val date: String? = null
 )

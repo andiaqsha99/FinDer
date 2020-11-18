@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0e89c9a4f48ed33b5367604630146a0f",
+    "identityHash": "0ad8f02df0ade02122fd96032e6a0292",
     "entities": [
       {
         "tableName": "Note",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_note` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text` TEXT, `type` TEXT, `date` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_note` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text` TEXT, `amount` INTEGER NOT NULL, `type` TEXT, `date` TEXT)",
         "fields": [
           {
             "fieldPath": "id_note",
@@ -19,6 +19,12 @@
             "columnName": "text",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "type",
@@ -44,7 +50,7 @@
       },
       {
         "tableName": "Plan",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_plan` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text` TEXT, `type` TEXT, `date` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_plan` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `text` TEXT, `amount` INTEGER NOT NULL, `type` TEXT, `date` TEXT)",
         "fields": [
           {
             "fieldPath": "id_plan",
@@ -57,6 +63,12 @@
             "columnName": "text",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "type",
@@ -134,7 +146,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0e89c9a4f48ed33b5367604630146a0f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0ad8f02df0ade02122fd96032e6a0292')"
     ]
   }
 }

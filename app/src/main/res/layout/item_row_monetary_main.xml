@@ -14,6 +14,7 @@
         android:padding="8dp">
 
         <TextView
+            android:id="@+id/tv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="01.12.2020"
@@ -29,6 +30,7 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_entry_monetary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_row_monetary_entry"/>

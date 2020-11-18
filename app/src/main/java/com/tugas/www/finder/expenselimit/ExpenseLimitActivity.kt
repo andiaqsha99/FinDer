@@ -6,15 +6,19 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tugas.www.finder.R
 import kotlinx.android.synthetic.main.activity_expense_limit.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ExpenseLimitActivity : AppCompatActivity() {
 
     private lateinit var expenseLimitPagerAdapter: ExpenseLimitPagerAdapter
+    private val viewModel by viewModel<ExpenseLimitViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense_limit)
         setSupportActionBar(toolbar_expense_limit)
+
+        viewModel.setUserData()
 
         expenseLimitPagerAdapter = ExpenseLimitPagerAdapter(this)
         view_pager_expense.adapter = expenseLimitPagerAdapter
