@@ -116,6 +116,7 @@
                         android:textColor="#FFFFFF"/>
 
                     <TextView
+                        android:id="@+id/total_income"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Rp100.000.000.000,00"
@@ -150,6 +151,7 @@
                         android:textColor="#FFFFFF"/>
 
                     <TextView
+                        android:id="@+id/total_expense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Rp100.000.000.000,00"

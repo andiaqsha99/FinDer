@@ -9,13 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialFade
 import com.tugas.www.finder.R
+import com.tugas.www.finder.database.model.Note
 import com.tugas.www.finder.database.model.User
+import com.tugas.www.finder.database.repository.NoteRepository
 import com.tugas.www.finder.expenselimit.ExpenseLimitActivity
 import com.tugas.www.finder.expenselimit.ExpenseLimitViewModel
 import com.tugas.www.finder.fab.FabMenu
@@ -63,6 +66,19 @@ class HomeFragment : Fragment() {
         })
         viewModel.getListNote().observe(viewLifecycleOwner, Observer {
             homeMainAdapter.setNote(it)
+            var income: Int = 0
+            var expense: Int = 0
+
+            for (i in it.indices){
+                if(it[i].type == "income"){
+                    income += it[i].amount
+                }else{
+                    expense += it[i].amount
+                }
+            }
+
+            total_income.text = "Rp$income"
+            total_expense.text = "Rp$expense"
         })
 
         viewBudget.getUserData().observe(viewLifecycleOwner, Observer {
@@ -78,7 +94,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-       setFab()
+        setFab()
     }
 
     private fun buildContainerTransformation() =
