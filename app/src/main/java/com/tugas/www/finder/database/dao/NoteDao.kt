@@ -23,4 +23,13 @@ interface NoteDao {
 
     @Query("SELECT DISTINCT strftime('%Y-%m', date) AS listMonth FROM note ORDER BY listMonth ASC")
     fun getListMonth(): LiveData<List<String>>
+
+    @Query("SELECT * FROM note WHERE date = :dates AND type = :types LIMIT 1")
+    fun getNoteByDateAndType(dates: String, types: String): Note
+
+    @Query("SELECT SUM(amount) FROM note WHERE type = 'income'")
+    fun getSumIncome(): LiveData<Int>
+
+    @Query("SELECT SUM(amount) FROM note WHERE type = 'expense'")
+    fun getSumExpense(): LiveData<Int>
 }

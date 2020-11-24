@@ -23,6 +23,7 @@ import com.tugas.www.finder.expenselimit.ExpenseLimitActivity
 import com.tugas.www.finder.expenselimit.ExpenseLimitViewModel
 import com.tugas.www.finder.fab.FabMenu
 import com.tugas.www.finder.fab.FabMenuAdapter
+import com.tugas.www.finder.formatToRupiah
 import com.tugas.www.finder.inputmonetary.InputExpenseActivity
 import com.tugas.www.finder.inputmonetary.InputIncomeActivity
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -41,6 +42,9 @@ class HomeFragment : Fragment() {
     private val viewBudget by viewModel<ExpenseLimitViewModel>()
     private lateinit var user: User
     private lateinit var homeMainAdapter: HomeMainAdapter
+    private var sumIncome = 0
+    private var sumExpense = 0
+    private var balance = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +60,31 @@ class HomeFragment : Fragment() {
         viewModel.apply {
             setListNote()
             setListDate()
+            setSumExpense()
+            setSumIncome()
         }
         rv_main_monetary.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = homeMainAdapter
         }
+
+        viewModel.getSumExpense().observe(viewLifecycleOwner, {
+            if (it != null) {
+                sumExpense = it
+            }
+            balance = sumIncome - sumExpense
+            tv_home_expense.text = formatToRupiah(sumExpense.toLong())
+            tv_home_balance.text = formatToRupiah(balance.toLong())
+        })
+        viewModel.getSumIncome().observe(viewLifecycleOwner, {
+            if (it != null) {
+                sumIncome = it
+            }
+            balance = sumIncome - sumExpense
+            tv_home_income.text = formatToRupiah(sumIncome.toLong())
+            tv_home_balance.text = formatToRupiah(balance.toLong())
+        })
+
         viewModel.getListDate().observe(viewLifecycleOwner, Observer {
             homeMainAdapter.setData(it)
         })

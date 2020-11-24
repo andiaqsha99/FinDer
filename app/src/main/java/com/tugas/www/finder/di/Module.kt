@@ -1,6 +1,7 @@
 package com.tugas.www.finder.di
 
 import androidx.room.Room
+import com.tugas.www.finder.calendar.CalendarViewModel
 import com.tugas.www.finder.database.AppDatabase
 import com.tugas.www.finder.database.repository.NoteRepository
 import com.tugas.www.finder.database.repository.PlanRepository
@@ -9,6 +10,7 @@ import com.tugas.www.finder.expenselimit.ExpenseLimitViewModel
 import com.tugas.www.finder.history.HistoryViewModel
 import com.tugas.www.finder.home.HomeViewModel
 import com.tugas.www.finder.inputmonetary.InputNoteViewModel
+import com.tugas.www.finder.plan.PlanViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -57,5 +59,13 @@ val appModule = module {
 
     viewModel {
         HistoryViewModel(get())
+    }
+
+    viewModel {
+        PlanViewModel(get())
+    }
+
+    viewModel {
+        CalendarViewModel(get(), get())
     }
 }

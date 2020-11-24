@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="01.12.2020"
-            android:textSize="24sp"
-            android:textAlignment="center"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <View

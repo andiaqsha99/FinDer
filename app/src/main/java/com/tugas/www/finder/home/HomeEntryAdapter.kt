@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tugas.www.finder.R
 import com.tugas.www.finder.database.model.Note
+import com.tugas.www.finder.formatToRupiah
 import kotlinx.android.synthetic.main.item_row_monetary_entry.view.*
 
 class HomeEntryAdapter: RecyclerView.Adapter<HomeEntryAdapter.HomeEntryViewHolder>() {
@@ -28,12 +29,12 @@ class HomeEntryAdapter: RecyclerView.Adapter<HomeEntryAdapter.HomeEntryViewHolde
             }
             if (note.type == "income") {
                 itemView.apply {
-                    tv_income_amount.text = note.amount.toString()
+                    tv_income_amount.text = formatToRupiah(note.amount.toLong())
                     tv_income_note.text = note.text
                 }
             } else {
                 itemView.apply {
-                    tv_expense_amount.text = note.amount.toString()
+                    tv_expense_amount.text = formatToRupiah(note.amount.toLong())
                     tv_expense_note.text = note.text
                 }
             }

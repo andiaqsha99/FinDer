@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tugas.www.finder.R
+import com.tugas.www.finder.formatToRupiah
+import kotlinx.android.synthetic.main.fragment_history_daily.*
 import kotlinx.android.synthetic.main.fragment_history_monthly.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -21,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HistoryMonthlyFragment : Fragment() {
 
     private val viewModel by viewModel<HistoryViewModel>()
-    private lateinit var historyAdapter: HistoryDailyAdapter
+    private lateinit var historyAdapter: HistoryMainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +38,13 @@ class HistoryMonthlyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        historyAdapter = HistoryDailyAdapter("monthly")
+        historyAdapter = HistoryMainAdapter("monthly")
         viewModel.apply {
             setListDate()
             setListMonth()
             setListNote()
+            setSumExpense()
+            setSumIncome()
         }
 
         rv_history_monthly.apply {
@@ -55,6 +58,21 @@ class HistoryMonthlyFragment : Fragment() {
 
         viewModel.getListNote().observe(viewLifecycleOwner, Observer {
             historyAdapter.setListNote(it)
+        })
+
+        tv_total_expense_monthly.text = formatToRupiah(0)
+        tv_total_income_monthly.text = formatToRupiah(0)
+
+        viewModel.getSumExpense().observe(viewLifecycleOwner, {
+            if (it !=null) {
+                tv_total_expense_monthly.text = formatToRupiah(it.toLong())
+            }
+        })
+
+        viewModel.getSumIncome().observe(viewLifecycleOwner, {
+            if (it !=null) {
+                tv_total_income_monthly.text = formatToRupiah(it.toLong())
+            }
         })
     }
 }

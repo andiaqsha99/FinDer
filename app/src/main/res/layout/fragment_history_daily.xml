@@ -24,7 +24,7 @@
                android:text="Total Income"/>
 
            <TextView
-               android:id="@+id/tv_total_income"
+               android:id="@+id/tv_total_income_daily"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_below="@id/label_income"
@@ -41,7 +41,7 @@
                android:text="Total Expense" />
 
            <TextView
-               android:id="@+id/tv_total_expense"
+               android:id="@+id/tv_total_expense_daily"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_below="@+id/label_expense"
@@ -55,6 +55,7 @@
         android:id="@+id/rv_history_daily"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="16dp"/>
 
 </LinearLayout>
