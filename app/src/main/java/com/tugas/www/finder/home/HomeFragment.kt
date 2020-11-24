@@ -42,9 +42,6 @@ class HomeFragment : Fragment() {
     private val viewBudget by viewModel<ExpenseLimitViewModel>()
     private lateinit var user: User
     private lateinit var homeMainAdapter: HomeMainAdapter
-    private var sumIncome = 0
-    private var sumExpense = 0
-    private var balance = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,23 +65,6 @@ class HomeFragment : Fragment() {
             adapter = homeMainAdapter
         }
 
-        viewModel.getSumExpense().observe(viewLifecycleOwner, {
-            if (it != null) {
-                sumExpense = it
-            }
-            balance = sumIncome - sumExpense
-            tv_home_expense.text = formatToRupiah(sumExpense.toLong())
-            tv_home_balance.text = formatToRupiah(balance.toLong())
-        })
-        viewModel.getSumIncome().observe(viewLifecycleOwner, {
-            if (it != null) {
-                sumIncome = it
-            }
-            balance = sumIncome - sumExpense
-            tv_home_income.text = formatToRupiah(sumIncome.toLong())
-            tv_home_balance.text = formatToRupiah(balance.toLong())
-        })
-
         viewModel.getListDate().observe(viewLifecycleOwner, Observer {
             homeMainAdapter.setData(it)
         })
@@ -101,17 +81,18 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            total_income.text = "Rp$income"
-            total_expense.text = "Rp$expense"
+            total_income.text = formatToRupiah(income.toLong())
+            total_expense.text = formatToRupiah(expense.toLong())
         })
 
         viewBudget.getUserData().observe(viewLifecycleOwner, Observer {
-            user = it
+
             try {
+                user = it
                 if (user.monthly_limit == 0) {
                     budget.text = "No Monthly Budget"
                 } else {
-                    budget.text = "Rp${user.monthly_limit}"
+                    budget.text = formatToRupiah(user.monthly_limit.toLong())
                 }
             } catch (e: Exception) {
                 budget.text = "No Monthly Budget"
