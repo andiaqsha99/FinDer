@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".history.HistoryWeeklyFragment">
 
     <androidx.cardview.widget.CardView
@@ -14,13 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp">
+
             <TextView
                 android:id="@+id/label_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="Total Income"/>
+                android:text="Total Income" />
 
             <TextView
                 android:id="@+id/tv_total_income_weekly"

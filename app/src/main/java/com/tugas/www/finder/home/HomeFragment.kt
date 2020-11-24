@@ -2,18 +2,25 @@ package com.tugas.www.finder.home
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialFade
 import com.tugas.www.finder.R
+import com.tugas.www.finder.database.model.Note
+import com.tugas.www.finder.database.model.User
+import com.tugas.www.finder.database.repository.NoteRepository
 import com.tugas.www.finder.expenselimit.ExpenseLimitActivity
+import com.tugas.www.finder.expenselimit.ExpenseLimitViewModel
 import com.tugas.www.finder.fab.FabMenu
 import com.tugas.www.finder.fab.FabMenuAdapter
 import com.tugas.www.finder.formatToRupiah
@@ -21,6 +28,8 @@ import com.tugas.www.finder.inputmonetary.InputExpenseActivity
 import com.tugas.www.finder.inputmonetary.InputIncomeActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.Exception
+import kotlin.reflect.typeOf
 
 /**
  * A simple [Fragment] subclass.
@@ -30,6 +39,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
 
     private val viewModel by viewModel<HomeViewModel>()
+    private val viewBudget by viewModel<ExpenseLimitViewModel>()
+    private lateinit var user: User
     private lateinit var homeMainAdapter: HomeMainAdapter
     private var sumIncome = 0
     private var sumExpense = 0
@@ -79,9 +90,35 @@ class HomeFragment : Fragment() {
         })
         viewModel.getListNote().observe(viewLifecycleOwner, Observer {
             homeMainAdapter.setNote(it)
+            var income: Int = 0
+            var expense: Int = 0
+
+            for (i in it.indices){
+                if(it[i].type == "income"){
+                    income += it[i].amount
+                }else{
+                    expense += it[i].amount
+                }
+            }
+
+            total_income.text = "Rp$income"
+            total_expense.text = "Rp$expense"
         })
 
-       setFab()
+        viewBudget.getUserData().observe(viewLifecycleOwner, Observer {
+            user = it
+            try {
+                if (user.monthly_limit == 0) {
+                    budget.text = "No Monthly Budget"
+                } else {
+                    budget.text = "Rp${user.monthly_limit}"
+                }
+            } catch (e: Exception) {
+                budget.text = "No Monthly Budget"
+            }
+        })
+
+        setFab()
     }
 
     private fun buildContainerTransformation() =

@@ -40,7 +40,7 @@
             android:layout_weight="4"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:inputType="text"
+            android:inputType="number"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"/>
 
