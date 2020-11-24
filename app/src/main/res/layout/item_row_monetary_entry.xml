@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rp1.000.000.000,00"
-            android:textSize="16sp"
-            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textAlignment="textStart"
             android:textStyle="bold"
             android:textColor="#00a113"/>
 
@@ -27,7 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Jualan Wak Doyok"
-            android:textAlignment="center"/>
+            android:textSize="13sp"
+            android:textAlignment="viewStart"/>
 
     </LinearLayout>
 
@@ -42,8 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rp1.000.000.000,00"
-            android:textSize="16sp"
-            android:textAlignment="center"
+            android:textSize="13sp"
+            android:textAlignment="textEnd"
             android:textStyle="bold"
             android:textColor="#e30000"/>
 
@@ -52,7 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Bucin"
-            android:textAlignment="center"/>
+            android:textSize="13sp"
+            android:textAlignment="textEnd"/>
 
     </LinearLayout>
 

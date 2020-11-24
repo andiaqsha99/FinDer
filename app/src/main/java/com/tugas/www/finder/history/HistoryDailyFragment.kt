@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tugas.www.finder.R
+import com.tugas.www.finder.formatToRupiah
 import kotlinx.android.synthetic.main.fragment_history_daily.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -20,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HistoryDailyFragment : Fragment() {
 
     private val viewModel by viewModel<HistoryViewModel>()
-    private lateinit var historyAdapter: HistoryDailyAdapter
+    private lateinit var historyAdapter: HistoryMainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +36,13 @@ class HistoryDailyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        historyAdapter = HistoryDailyAdapter("daily")
+        historyAdapter = HistoryMainAdapter("daily")
         viewModel.apply {
             setListDate()
             setListMonth()
             setListNote()
+            setSumExpense()
+            setSumIncome()
         }
 
         rv_history_daily.apply {
@@ -54,6 +56,21 @@ class HistoryDailyFragment : Fragment() {
 
         viewModel.getListNote().observe(viewLifecycleOwner, Observer {
             historyAdapter.setListNote(it)
+        })
+
+        tv_total_expense_daily.text = formatToRupiah(0)
+        tv_total_income_daily.text = formatToRupiah(0)
+
+        viewModel.getSumExpense().observe(viewLifecycleOwner, {
+            if (it !=null) {
+                tv_total_expense_daily.text = formatToRupiah(it.toLong())
+            }
+        })
+
+        viewModel.getSumIncome().observe(viewLifecycleOwner, {
+            if (it !=null) {
+                tv_total_income_daily.text = formatToRupiah(it.toLong())
+            }
         })
     }
 }

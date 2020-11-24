@@ -73,6 +73,7 @@
                     android:textColor="#FFFFFF"/>
 
                 <TextView
+                    android:id="@+id/tv_home_balance"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -115,6 +116,7 @@
                         android:textColor="#FFFFFF"/>
 
                     <TextView
+                        android:id="@+id/tv_home_income"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Rp100.000.000.000,00"
@@ -149,6 +151,7 @@
                         android:textColor="#FFFFFF"/>
 
                     <TextView
+                        android:id="@+id/tv_home_expense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Rp100.000.000.000,00"

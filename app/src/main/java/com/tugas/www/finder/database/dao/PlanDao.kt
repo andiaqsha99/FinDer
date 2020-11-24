@@ -17,4 +17,10 @@ interface PlanDao {
 
     @Query("SELECT * FROM `plan`")
     fun getAllPlan(): LiveData<List<Plan>>
+
+    @Query("SELECT * FROM `plan` WHERE date = :dates AND type = :types LIMIT 1")
+    fun getPlanByDateAndType(dates: String, types: String): Plan
+
+    @Query("SELECT DISTINCT date FROM `plan` ORDER BY date ASC")
+    fun getListPlanDate(): LiveData<List<String>>
 }

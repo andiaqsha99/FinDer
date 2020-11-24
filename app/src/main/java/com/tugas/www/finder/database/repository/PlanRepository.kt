@@ -21,4 +21,12 @@ class PlanRepository(private val planDao: PlanDao) {
     suspend fun deletePlan(plan: Plan) {
         planDao.delete(plan)
     }
+
+    fun getPlanByDateAndType(date:String, type :String): Plan {
+        return planDao.getPlanByDateAndType(date, type)
+    }
+
+    fun getListPlanDate(): LiveData<List<String>> {
+        return planDao.getListPlanDate()
+    }
 }

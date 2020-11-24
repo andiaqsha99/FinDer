@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tugas.www.finder.R
+import com.tugas.www.finder.changeDateFormat
 import com.tugas.www.finder.database.model.Note
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.item_row_monetary_main.view.*
@@ -33,7 +34,7 @@ class HomeMainAdapter: RecyclerView.Adapter<HomeMainAdapter.HomeMainAdapterViewH
             val homeEntryAdapter = HomeEntryAdapter()
 
             itemView.apply {
-                tv_date.text = date
+                tv_date.text = changeDateFormat("yyyy-MM-dd", "dd.MM.yyyy", date)
                 rv_entry_monetary.let {
                     it.layoutManager = LinearLayoutManager(rv_entry_monetary.context)
                     it.adapter = homeEntryAdapter
