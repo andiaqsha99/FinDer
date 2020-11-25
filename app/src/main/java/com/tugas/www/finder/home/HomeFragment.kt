@@ -85,19 +85,23 @@ class HomeFragment : Fragment() {
             total_expense.text = formatToRupiah(expense.toLong())
         })
 
-        viewBudget.getUserData().observe(viewLifecycleOwner, Observer {
+        try {
+            viewBudget.getUserData().observe(viewLifecycleOwner, Observer {
 
-            try {
-                user = it
-                if (user.monthly_limit == 0) {
+                try {
+                    user = it
+                    if (user.monthly_limit == 0) {
+                        budget.text = "No Monthly Budget"
+                    } else {
+                        budget.text = formatToRupiah(user.monthly_limit.toLong())
+                    }
+                } catch (e: Exception) {
                     budget.text = "No Monthly Budget"
-                } else {
-                    budget.text = formatToRupiah(user.monthly_limit.toLong())
                 }
-            } catch (e: Exception) {
-                budget.text = "No Monthly Budget"
-            }
-        })
+            })
+        }catch (e: Exception){
+            Log.d("ERROR", e.toString())
+        }
 
         setFab()
     }
