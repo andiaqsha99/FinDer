@@ -41,6 +41,7 @@ fun showLimitNotification(context: FragmentActivity, title: String, message: Str
         .setSmallIcon(R.drawable.ic_baseline_notifications_24)
         .setContentTitle(title)
         .setContentText(message)
+        .setVibrate(longArrayOf(1000, 1000, 1000))
         .setColor(ContextCompat.getColor(context, android.R.color.transparent))
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -48,6 +49,8 @@ fun showLimitNotification(context: FragmentActivity, title: String, message: Str
         CHANNEL_NAME,
         NotificationManager.IMPORTANCE_DEFAULT)
 
+        channel.enableVibration(true)
+        channel.vibrationPattern = longArrayOf(1000, 1000, 1000)
         builder.setChannelId(CHANNEL_ID)
         notificationManagerCompat.createNotificationChannel(channel)
     }
