@@ -10,10 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".PassCodeActivity"></activity>
+        <activity android:name=".SetPassCodeActivity" />
+
         <receiver
             android:name=".AlarmReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".expenselimit.ExpenseLimitActivity" />
         <activity android:name=".plan.SetIncomeActivity" />

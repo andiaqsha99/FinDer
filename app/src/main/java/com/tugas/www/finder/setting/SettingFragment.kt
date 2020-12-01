@@ -1,11 +1,13 @@
 package com.tugas.www.finder.setting
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tugas.www.finder.AlarmReceiver
+import com.tugas.www.finder.SetPassCodeActivity
 import com.tugas.www.finder.R
 import com.tugas.www.finder.database.model.Plan
 import com.tugas.www.finder.home.HomeViewModel
@@ -63,7 +65,9 @@ class SettingFragment : Fragment() {
             }
         }
 
-
+        pass_code_card.setOnClickListener {
+            startActivity(Intent(context, SetPassCodeActivity::class.java))
+        }
     }
 
     private fun setPlanNotification(listPlan: List<Plan>) {

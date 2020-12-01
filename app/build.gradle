@@ -63,4 +63,5 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
+    implementation 'com.chaos.view:pinview:1.4.4'
 }
