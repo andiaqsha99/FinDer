@@ -22,7 +22,6 @@ import java.util.*
 class SettingFragment : Fragment() {
 
     private val viewModel by viewModel<HomeViewModel>()
-    private var planNotifSetting: Boolean = false
     private val alarmReceiver = AlarmReceiver()
 
     override fun onCreateView(
@@ -52,19 +51,19 @@ class SettingFragment : Fragment() {
 
             sw_plan.setOnCheckedChangeListener { _, state ->
                 settingPreference.setPlanNotificationSetting(state)
-                planNotifSetting = settingPreference.getPlanNotificationSetting()
+                viewModel.getOnGoingPlan().observe(viewLifecycleOwner, {
+                    if (it != null) {
+                        if (state) {
+                            setPlanNotification(it)
+                        } else {
+                            cancelPlanNotification(it)
+                        }
+                    }
+                })
             }
         }
 
-        viewModel.getOnGoingPlan().observe(viewLifecycleOwner, {
-            if (it != null) {
-                if (planNotifSetting) {
-                    setPlanNotification(it)
-                } else {
-                    cancelPlanNotification(it)
-                }
-            }
-        })
+
     }
 
     private fun setPlanNotification(listPlan: List<Plan>) {

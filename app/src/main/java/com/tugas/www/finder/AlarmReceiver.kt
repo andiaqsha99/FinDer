@@ -19,12 +19,18 @@ class AlarmReceiver : BroadcastReceiver() {
 
     companion object {
         const val EXTRA_MESSAGE = "message"
+        const val EXTRA_TYPE = "type"
     }
 
     override fun onReceive(context: Context, intent: Intent) {
         val message = intent.getStringExtra(EXTRA_MESSAGE)
+        val type = intent.getStringExtra(EXTRA_TYPE)
 
-        showNotification(context, "Today Plan", message, 1)
+        if (type == "income") {
+            showNotification(context, "Today Income Plan", message, 1)
+        } else {
+            showNotification(context, "Today Expense Plan", message, 2)
+        }
     }
 
     private fun showNotification(context: Context, title: String, message: String?, notifId: Int) {
@@ -56,6 +62,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
         intent.putExtra(EXTRA_MESSAGE, plan.text)
+        intent.putExtra(EXTRA_TYPE, plan.type)
 
         val dateArray = plan.date?.split("-")?.toTypedArray()
         val calendar = Calendar.getInstance()

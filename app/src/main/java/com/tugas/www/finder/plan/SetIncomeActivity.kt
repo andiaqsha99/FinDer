@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
+import com.tugas.www.finder.AlarmReceiver
 import com.tugas.www.finder.MainActivity
 import com.tugas.www.finder.R
 import com.tugas.www.finder.database.model.Plan
@@ -22,10 +23,15 @@ class SetIncomeActivity : AppCompatActivity() {
     private lateinit var dateString: String
     private var amount: Int = 0
     private lateinit var notes: String
+    private val alarmReceiver = AlarmReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_income)
+
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val todayDate = dateFormat.format(calendar.time)
 
         et_income_date_plan.inputType = InputType.TYPE_NULL
         et_income_date_plan.setOnClickListener {
@@ -60,6 +66,14 @@ class SetIncomeActivity : AppCompatActivity() {
                 type = "income"
             )
             viewModel.inputPlan(plan)
+            viewModel.setOngoingPlan(todayDate)
+            viewModel.getOnGoingPlan().observe(this, {
+                if (it != null) {
+                    for( plan in it) {
+                        alarmReceiver.setAlarm(this, plan)
+                    }
+                }
+            })
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
