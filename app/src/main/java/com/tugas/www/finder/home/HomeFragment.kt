@@ -15,20 +15,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialFade
-import com.tugas.www.finder.R
+import com.tugas.www.finder.*
 import com.tugas.www.finder.database.model.Note
+import com.tugas.www.finder.database.model.Plan
 import com.tugas.www.finder.database.model.User
 import com.tugas.www.finder.database.repository.NoteRepository
 import com.tugas.www.finder.expenselimit.ExpenseLimitActivity
 import com.tugas.www.finder.expenselimit.ExpenseLimitViewModel
 import com.tugas.www.finder.fab.FabMenu
 import com.tugas.www.finder.fab.FabMenuAdapter
-import com.tugas.www.finder.formatToRupiah
 import com.tugas.www.finder.inputmonetary.InputExpenseActivity
 import com.tugas.www.finder.inputmonetary.InputIncomeActivity
+import com.tugas.www.finder.setting.SettingPreference
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.reflect.typeOf
 
 /**
@@ -42,6 +45,7 @@ class HomeFragment : Fragment() {
     private val viewBudget by viewModel<ExpenseLimitViewModel>()
     private lateinit var user: User
     private lateinit var homeMainAdapter: HomeMainAdapter
+    private var limitNotifSetting: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +57,27 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val settingPreference = activity?.let { SettingPreference(it) }
+        if (settingPreference != null) {
+            limitNotifSetting = settingPreference.getExpenseLimitNotifSetting()
+        }
+
+        viewBudget.setUserData()
+        viewBudget.getUserData().observe(viewLifecycleOwner, Observer {
+
+            try {
+                user = it
+                if (user.monthly_limit == 0) {
+                    budget.text = "No Monthly Budget"
+                } else {
+                    budget.text = formatToRupiah(user.monthly_limit.toLong())
+                }
+            } catch (e: Exception) {
+                budget.text = "No Monthly Budget"
+            }
+        })
+
         homeMainAdapter = HomeMainAdapter()
         viewModel.apply {
             setListNote()
@@ -84,22 +109,8 @@ class HomeFragment : Fragment() {
             total_income.text = formatToRupiah(income.toLong())
             total_expense.text = formatToRupiah(expense.toLong())
         })
-
-        viewBudget.getUserData().observe(viewLifecycleOwner, Observer {
-
-            try {
-                user = it
-                if (user.monthly_limit == 0) {
-                    budget.text = "No Monthly Budget"
-                } else {
-                    budget.text = formatToRupiah(user.monthly_limit.toLong())
-                }
-            } catch (e: Exception) {
-                budget.text = "No Monthly Budget"
-            }
-        })
-
         setFab()
+        setNotification()
     }
 
     private fun buildContainerTransformation() =
@@ -168,5 +179,53 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(this@HomeFragment.context)
             adapter = FabMenuAdapter(listMenu)
         }
+    }
+
+    private fun setNotification() {
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val todayDate = dateFormat.format(calendar.time)
+        Log.d("Home daily limit", todayDate)
+        val weekNum = getWeekOfDate(todayDate)
+        val monthYear = changeDateFormat("yyyy-MM-dd", "yyyy-MM", todayDate)
+
+        calendar.set(Calendar.WEEK_OF_YEAR, weekNum.toInt())
+        val yourDate: Date = calendar.time
+        calendar.time = yourDate
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+        val startWeek = dateFormat.format(calendar.time)
+        calendar.add(Calendar.DATE, 6)
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+        val endWeek = dateFormat.format(calendar.time)
+
+        viewModel.apply {
+            setDailyExpenseSum(todayDate)
+            setWeeklyExpenseSum(startWeek, endWeek)
+            setMonthlyExpenseSum(monthYear)
+        }
+
+        viewModel.getSumDailyExpense().observe(viewLifecycleOwner, {
+            if (it != null && user.daily_limit != 0) {
+                if (it > user.daily_limit && limitNotifSetting) {
+                    showLimitNotification(requireActivity(),"Limit Daily", "Your daily limit has been reached", 1)
+                }
+            }
+        })
+
+        viewModel.getSumWeeklyExpense().observe(viewLifecycleOwner, {
+            if (it != null && user.weekly_limit != 0) {
+                if (it >user.weekly_limit && limitNotifSetting) {
+                    showLimitNotification(requireActivity(),"Limit Weekly", "Your weekly limit has been reached", 2)
+                }
+            }
+        })
+
+        viewModel.getSumMonthlyExpense().observe(viewLifecycleOwner, {
+            if (it != null && user.monthly_limit != 0) {
+                if (it.toInt() > user.monthly_limit && limitNotifSetting) {
+                    showLimitNotification(requireActivity(),"Limit Monthly", "Your monthly limit has been reached", 3)
+                }
+            }
+        })
     }
 }

@@ -41,4 +41,16 @@ class NoteRepository(private val noteDao: NoteDao) {
     fun getSumExpense(): LiveData<Int> {
         return noteDao.getSumExpense()
     }
+
+    fun getSumExpenseOneDay(dates: String): LiveData<Int> {
+        return noteDao.getSumExpenseOneDay(dates)
+    }
+
+    fun getSumExpenseWeekly(firstDate: String, lastDate: String): LiveData<Int> {
+        return noteDao.getSumExpenseWeekly(firstDate, lastDate)
+    }
+
+    fun getSumExpenseMonthly(monthYear: String): LiveData<Int> {
+        return noteDao.getSumExpenseMonthly(monthYear)
+    }
 }

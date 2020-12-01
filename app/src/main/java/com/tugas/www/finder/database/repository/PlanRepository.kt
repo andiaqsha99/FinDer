@@ -29,4 +29,8 @@ class PlanRepository(private val planDao: PlanDao) {
     fun getListPlanDate(): LiveData<List<String>> {
         return planDao.getListPlanDate()
     }
+
+    fun getListNextPlan(date: String): LiveData<List<Plan>> {
+        return planDao.getAllNextPLan(date)
+    }
 }

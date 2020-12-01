@@ -50,7 +50,7 @@ val appModule = module {
     }
 
     viewModel {
-        HomeViewModel(get())
+        HomeViewModel(get(), get())
     }
 
     viewModel {
