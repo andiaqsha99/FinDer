@@ -32,4 +32,13 @@ interface NoteDao {
 
     @Query("SELECT SUM(amount) FROM note WHERE type = 'expense'")
     fun getSumExpense(): LiveData<Int>
+
+    @Query("SELECT SUM(amount) FROM note WHERE date = :dates AND type = 'expense'")
+    fun getSumExpenseOneDay(dates: String): LiveData<Int>
+
+    @Query("SELECT SUM(amount) FROM note WHERE date >= :firstDate AND date <= :lastDate AND type = 'expense'")
+    fun getSumExpenseWeekly(firstDate: String, lastDate: String): LiveData<Int>
+
+    @Query("SELECT SUM(amount) FROM note WHERE strftime('%Y-%m', date) = :monthYear AND type = 'expense'")
+    fun getSumExpenseMonthly(monthYear: String): LiveData<Int>
 }

@@ -23,4 +23,7 @@ interface PlanDao {
 
     @Query("SELECT DISTINCT date FROM `plan` ORDER BY date ASC")
     fun getListPlanDate(): LiveData<List<String>>
+
+    @Query("SELECT * FROM `plan` WHERE date >= :dates")
+    fun getAllNextPLan(dates: String): LiveData<List<Plan>>
 }
