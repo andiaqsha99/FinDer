@@ -1,6 +1,7 @@
 package com.tugas.www.finder.chart
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.Exception
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -29,7 +31,7 @@ import java.util.*
 class ChartFragment : Fragment() {
 
     private val category = arrayOf("Income", "Expense")
-    private val number = arrayOf(0, 0)
+    private var number: MutableList<Int> = ArrayList()
     private val viewModel by viewModel<HomeViewModel>()
     private lateinit var homeMainAdapter: HomeMainAdapter
 
@@ -45,6 +47,11 @@ class ChartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         try {
+            homeMainAdapter = HomeMainAdapter()
+            viewModel.apply {
+                setListNote()
+            }
+
             viewModel.getListNote().observe(viewLifecycleOwner, Observer{
                 homeMainAdapter.setNote(it)
                 var income = 0
@@ -58,16 +65,18 @@ class ChartFragment : Fragment() {
                     }
                 }
 
+                number.add(income)
+                number.add(expense)
+
+                setupPieChart()
+
             })
-        }catch (e: Exception){
+        }catch(e: Exception){
             Toast.makeText(context, "No Data Found", Toast.LENGTH_SHORT)
         }
-
-        setupPieChart()
-
     }
 
-    fun setupPieChart(){
+    private fun setupPieChart(){
         val pie: Pie = AnyChart.pie()
         val dataEntries: MutableList<DataEntry> = ArrayList()
 
