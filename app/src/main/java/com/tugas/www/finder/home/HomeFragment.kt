@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel by viewModel<HomeViewModel>()
     private val viewBudget by viewModel<ExpenseLimitViewModel>()
-    private lateinit var user: User
+    private var user: User = User(0, "", 0, 0, 0, 0)
     private lateinit var homeMainAdapter: HomeMainAdapter
     private var limitNotifSetting: Boolean = false
 
