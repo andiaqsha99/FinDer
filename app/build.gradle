@@ -23,6 +23,7 @@ android {
             }
         }
 
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -64,4 +65,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
     implementation 'com.chaos.view:pinview:1.4.4'
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+    implementation 'com.android.support:multidex:1.0.3'
 }
