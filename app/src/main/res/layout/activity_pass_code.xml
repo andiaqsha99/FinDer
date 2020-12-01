@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".PassCodeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Enter your passcode"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="56dp"/>
+
+    <com.chaos.view.PinView
+        android:id="@+id/et_pass_code"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:cursorVisible="true"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        app:cursorColor="@color/colorPrimary"
+        app:cursorWidth="2dp"
+        app:itemCount="4"
+        app:itemHeight="48dp"
+        app:viewType="line"
+        app:itemSpacing="16dp"
+        app:hideLineWhenFilled="true"/>
+
+    <Button
+        android:id="@+id/btn_confirm_pass_code"
+        android:layout_width="match_parent"
+        android:background="@drawable/rounded_button_green"
+        android:text="confirm"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"/>
+</LinearLayout>
